@@ -1,7 +1,7 @@
 // Create instance of chat widget
 
 // HTTC Transport Version
-var oChatUI = new GenesysChatUI($, $("#genie_chat"),
+var oChatUI = new GenesysChatUI($, $("#demo_chat_XYZ"),
 
 Transport_REST_HTTC, {
 	id : "515a4376-ac30-4ed2-801f-a876c0d56c93",
