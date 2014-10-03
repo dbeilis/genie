@@ -1,0 +1,22 @@
+{
+  "name": "Genie",
+  "description": "1-800-Genesys service companion.",
+  "manifest_version": 2,
+  "version": "0.1.0",
+  "minimum_chrome_version": "23",
+  "app": {
+    "background": {
+      "scripts": ["main.js"]
+    }
+  },
+  "icons": {
+    "16":  "images/swirl_16.png",
+    "64":  "images/swirl_64.png",
+    "128": "images/swirl_128.png"
+  },
+  "permissions": [
+    "geolocation",
+    "storage",
+    "<all_urls>"
+  ]
+}
