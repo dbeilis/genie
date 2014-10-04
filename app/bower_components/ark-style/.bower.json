@@ -1,0 +1,67 @@
+{
+  "name": "Ark Style",
+  "version": "1.0.0-27",
+  "main": [
+    "./dist/css/ark-css.css",
+    "./dist/js/ark-css.js"
+  ],
+  "ignore": [
+    "**/.*",
+    "_config.yml",
+    "CNAME",
+    "composer.json",
+    "CONTRIBUTING.md",
+    "docs",
+    "js/tests"
+  ],
+  "dependencies": {
+    "jquery": ">= 1.9.0"
+  },
+  "authors": [
+    {
+      "name": "Kamaldeep Cheema",
+      "email": "kamaldeep.cheema@genesys.com",
+      "username": "camelot\\kcheema",
+      "publisher": true
+    },
+    {
+      "name": "Ark Developers",
+      "email": "arkdevelopers@genesys.com"
+    }
+  ],
+  "comments": "Genesys style guide",
+  "src-repository": {
+    "type": "HG",
+    "url": "http://hg.genesyslab.com/hgweb.cgi/ark_style",
+    "project-root": "/"
+  },
+  "tag": "release-1.0.0-27",
+  "reviewers": [
+    {
+      "role": "Ark Core Team",
+      "name": "ARK Developers",
+      "email": "arkdevelopers@genesys.com"
+    },
+    {
+      "role": "UX",
+      "name": "Steven Gans",
+      "email": "steven.gans@genesys.com"
+    },
+    {
+      "role": "FOSS",
+      "name": "Alex Lee",
+      "email": "alex.lee@genesys.com"
+    }
+  ],
+  "_cacheHeaders": {
+    "ETag": "\"{SHA1{fcd5e5ec3fa7eaba8eef8be3acac77a692170121}}\"",
+    "Last-Modified": "Wed, 01 Oct 2014 16:06:19 GMT",
+    "Content-Length": "708682",
+    "Content-Type": "application/x-gzip",
+    "Content-Disposition": "attachment; filename=\"ark-style-1.0.00027.tar.gz\""
+  },
+  "_release": "*",
+  "_source": "http://ci-vm30.us.int.genesyslab.com:8200/nexus/service/local/artifact/maven/content?r=ag-prod&g=com.genesyslab.ark&e=tar.gz&a=ark-style&v=LATEST",
+  "_target": "*",
+  "_originalSource": "http://ci-vm30.us.int.genesyslab.com:8200/nexus/service/local/artifact/maven/content?r=ag-prod&g=com.genesyslab.ark&e=tar.gz&a=ark-style&v=LATEST"
+}

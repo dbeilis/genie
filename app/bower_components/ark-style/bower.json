@@ -1,0 +1,56 @@
+{
+  "name": "Ark Style",
+  "version": "1.0.0-27",
+  "main": [
+    "./dist/css/ark-css.css",
+    "./dist/js/ark-css.js"
+  ],
+  "ignore": [
+    "**/.*",
+    "_config.yml",
+    "CNAME",
+    "composer.json",
+    "CONTRIBUTING.md",
+    "docs",
+    "js/tests"
+  ],
+  "dependencies": {
+    "jquery": ">= 1.9.0"
+  },
+  "authors": [
+    {
+      "name": "Kamaldeep Cheema",
+      "email": "kamaldeep.cheema@genesys.com",
+      "username": "camelot\\kcheema",
+      "publisher": true
+    },
+    {
+      "name": "Ark Developers",
+      "email": "arkdevelopers@genesys.com"
+    }
+  ],
+  "comments": "Genesys style guide",
+  "src-repository": {
+    "type": "HG",
+    "url": "http://hg.genesyslab.com/hgweb.cgi/ark_style",
+    "project-root": "/"
+  },
+  "tag": "release-1.0.0-27",
+  "reviewers": [
+    {
+      "role": "Ark Core Team",
+      "name": "ARK Developers",
+      "email": "arkdevelopers@genesys.com"
+    },
+    {
+      "role": "UX",
+      "name": "Steven Gans",
+      "email": "steven.gans@genesys.com"
+    },
+    {
+      "role": "FOSS",
+      "name": "Alex Lee",
+      "email": "alex.lee@genesys.com"
+    }
+  ]
+}
