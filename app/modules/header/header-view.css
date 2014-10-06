@@ -1,0 +1,85 @@
+.g-widget
+{
+  position: relative;
+  width: 300px;
+  height: 350px;
+  margin: 50px auto;
+  background: #FFF;
+  border-radius: 5px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, .1);
+}
+
+.g-widget > .g-cover
+{
+  height: 160px;
+  overflow: hidden;
+}
+
+.g-widget > .g-cover > img
+{
+  width: 100%;
+  height: auto;
+  min-height: 160px;
+  border-radius: 4px 4px 0 0;
+}
+
+.g-widget > .photo
+{
+  position: absolute;
+  top: 85px;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  margin: 0 0 0 -55px;
+  border: 5px solid #FFF;
+  border-radius: 50%;
+}
+
+.g-widget > h1, .g-widget > h2, .g-widget > h3
+{
+  display: block;
+  margin: 10px 0;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: #999;
+}
+
+.g-widget > h1
+{
+  margin: 60px 0 20px;
+  font-size: 26px;
+  color: #000;
+}
+
+.g-widget > h3 { font-size: 12px }
+
+.g-widget > ul
+{
+  position: absolute;
+  top: 20px;
+  left: 100%;
+  background: #2CDFD3;
+  border-radius: 0 3px 3px 0;
+}
+
+.g-widget > ul > li > a
+{
+  display: block;
+  padding: 5px 6px;
+  color: #FFF;
+  cursor: pointer;
+  text-align: center;
+  border-bottom: 1px solid #2CD5CA;
+  transition: background-color .3s;
+}
+
+.g-widget > ul > li:hover > a { background-color: #2CD5CA }
+.g-widget > ul > li:first-child > a { border-radius: 0 3px 0 0 }
+
+.g-widget > ul > li:last-child > a
+{
+  border: none;
+  border-radius: 0 0 3px 0;
+}

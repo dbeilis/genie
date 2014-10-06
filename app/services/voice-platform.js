@@ -1,25 +1,97 @@
-function VoicePlatform(){
+'use strict';
 
-	var voicePlatformUri = "https://genesysvoice.com:8080" + "/gcfd/servlets";
+angular.module('genie')
+    .factory('voicePlatformService', function($resource, $http, $log) {
 
-	var sendNetworkRequest = function(request, success, failure) {
+        var voicePlatformUri = "https://genesysvoice.com:8080" + "/gcfd/servlets";
 
-	};
+        var VoicePlatformService = function() {
 
-	this.me = function() {
-		sendNetworkRequest("/chats/me", success, failure);
-	};
+            var self = this;
 
-	this.call = function(email) {
-		sendNetworkRequest("/chats/me", success, failure);
-	};
+            this.me = function(success, failure) {
+                var serviceUrl = voicePlatformUri + '/chats/me';
 
-	this.auth = function(pin) {
-		sendNetworkRequest("/chats/me", success, failure);
-	};
+                $http.get(serviceUrl).
+                    success(function(data, status) {
+                    	if (data && data.status && data.status === 'ok' && success) {
+                    		success(data);
+                    	} else {
+                    		failure(data);
+                    	}
+                    }).
+                    error(function(data,status){
+                        failure(data);
+                    });
+            };
 
-	this.logout = function() {
-		sendNetworkRequest("/chats/logout" success, failure);
-	};
+            this.login = function(email, success, failure) {
+                var serviceUrl = voicePlatformUri + '/chats/login';
 
-};
+                $http.post(serviceUrl, {'email': email}).
+                    success(function(data, status) {
+                    	if (data && data.status && data.status === 'ok' && success) {
+                    		success(data);
+                    	} else {
+                    		failure(data);
+                    	}
+                    }).
+                    error(function(data, status){
+                        failure(data);
+                    });
+            };
+
+            this.pin = function(pin, success, failure) {
+            	var serviceUrl = voicePlatformUri + '/chats/pin';
+
+                http.post(serviceUrl, {'pin': pin}).
+                    success(function(data, status) {
+                    	if (data && data.status && data.status === 'ok' && success) {
+                    		success(data);
+                    	} else {
+                    		failure(data);
+                        }
+                    }).
+                    error(function(data,status){
+                        failure(data);
+                    });
+            };
+
+            this.token = function(success, failure) {
+                var serviceUrl = voicePlatformUri + '/chats/token';
+
+                $http.get(serviceUrl).
+                    success(function(data, status) {
+                        if (data && data.status && data.status === 'ok' && success) {
+                            success(data);
+                        } else {
+                            failure(data);
+                        }
+                    }).
+                    error(function(data,status){
+                        failure(data);
+                    });
+            };
+
+            this.logout = function(success, failure) {
+
+            	var serviceUrl = voicePlatformUri + '/chats/logout';
+
+               $http.get(serviceUrl).
+                    success(function(data, status) {
+                        if (data && data.status && data.status === 'ok' && success) {
+                            success(data);
+                        } else {
+                            failure(data);
+                        }
+                    }).
+                    error(function(data,status){
+                        failure(data);
+                    });
+            };
+
+        };
+
+        return new VoicePlatformService();
+
+    });

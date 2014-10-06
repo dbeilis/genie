@@ -1,0 +1,16 @@
+{
+  "name": "angular",
+  "version": "1.2.16",
+  "main": "./angular.js",
+  "dependencies": {},
+  "_cacheHeaders": {
+    "ETag": "\"{SHA1{6e513984a804e085757162118a0311ae4320d96b}}\"",
+    "Last-Modified": "Thu, 05 Jun 2014 21:36:04 GMT",
+    "Content-Length": "369742",
+    "Content-Type": "application/x-gzip"
+  },
+  "_release": "1.2.16",
+  "_source": "http://ci-vm30.us.int.genesyslab.com:8200/nexus/service/local/repositories/ag-thirdparty-prod/content/ark/angular/1.2.16/angular-1.2.16.tar.gz",
+  "_target": "1.2.16",
+  "_originalSource": "http://ci-vm30.us.int.genesyslab.com:8200/nexus/service/local/repositories/ag-thirdparty-prod/content/ark/angular/1.2.16/angular-1.2.16.tar.gz"
+}

@@ -1,11 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html >
+	
 	<head>
+
 		<meta http-equiv="X-UA-Compatible" content="IE=10"/>
 		<title>Genesys Chat - REST API</title>
 
-		<link type="text/css" rel="stylesheet" href="bower_components/ark-style/dist/css/ark-css.css"/>		
-		<script src="bower_components/jquery/jquery-1.11.1.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="bower_components/ark-style/dist/css/ark-css.css"/>	
+
+		<link type="text/css" rel="stylesheet" href="modules/main/main.css"/>
+		<link type="text/css" rel="stylesheet" href="modules/header/header-view.css"/>
+
+	   	<script src="bower_components/jquery/dist/jquery.js"></script>
+	    <script src="bower_components/angular/angular.js"></script>
+	    <script src="bower_components/angular-resource/angular-resource.js"></script>
+	    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+	    <script src="bower_components/angular-route/angular-route.js"></script>
+
+	    <script src="lib_wrappers/jquery.js"></script>
 
 		<link type="text/css" rel="stylesheet" href="modules/chat_widget/chat.css"/>
 		<script src="modules/chat_widget/chat-api-lite.js"></script>
@@ -13,33 +25,18 @@
 		<script src="modules/chat_widget/transport/chat_transport_websocket.js"></script>
 		<script src="modules/chat_widget/chat.js"></script>
 
-		<link type="text/css" rel="stylesheet" href="modules/main/main.css"/>
+		<script src="modules/header/header-view.js"></script>
+		<script src="modules/main/angular-main.js"></script>
+
+		<script src="services/voice-platform.js"></script>
+		
 	</head>
-	<body>
 
-		<div id="login_panel" role="form">
-			<div class="form-group">
-				<label for="exampleInputEmail1">Email address</label>
-				<input type="email" class="form-control" id="exampleInputEmail">
-			</div>
-			<button class="btn btn-default call-button">Call</button>
+	<body ng-app="genie">
 
-			<div class="form-group">
-				<label for="exampleInputPin">Pin</label>
-				<input type="tel" class="form-control" id="exampleInputPin">
-			</div>
-			<button class="btn btn-default auth-button">Login</button>
-		</div>
+		<div ng-view></div>
 
-		<div id="chat_panel" class="ChatUI">
-			<div class="transcript"></div>
-			<div class="input-container">
-				<textarea class="input" placeholder="Try: 'Tell me about John Smith'"></textarea>
-			</div>
-			<div class="isTyping"></div>
-		</div>
-
-		<script src="modules/main/index.js"></script>
+		<!-- script src="modules/main/index.js"></script -->
 
 	</body>
 </html>
