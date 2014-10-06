@@ -21,10 +21,53 @@ angular.module('genie', [
 
 .controller('GenieController', ['$scope', '$log', '$route', 'voicePlatformService',
 	function($scope, $log, $route, voicePlatformService) {
-		$log.info("Angular Genie has started...");
+		$log.info("Angular Genie has started. Sending me request...");
 
-		voicePlatformService.me(
+		$scope.onLoginClick = function() {
+			$log.info("Sending login request for user - " + $scope.email);
+
+			voicePlatformService.sendLoginRequest($scope.email, 
+				function() {
+					$log.info("Login succeeded");
+				},
+				function(error) {
+					$log.warn("Failed to submit login request : " + error);
+					if (error && error.status) {
+						if (error.status === 'no_employee') {
+							$scope.emailError = "Could not find employee";
+						} else {
+							$scope.emailError = "Unknown error. Please contact support.";
+						}
+					}
+					
+				});
+		};
+
+		$scope.onPinClick = function() {
+			$log.info("Sending pin request - " + $scope.pin);
+
+			voicePlatformService.sendPinRequest($scope.pin, 
+				function() {
+					$log.info("Successfully sent pin request. Refreshing...")
+					$route.reload();
+				},
+				function(error) {
+					$log.warn("Failed to submit pin request : " + error);
+					$scope.pinError = error;
+					if (error && error.status) {
+						if (error.status === 'unknown') {
+							$scope.pinError = "Unknown error";
+						} else {
+							$scope.pinError = "Unknown error. Please contact support.";
+						}
+					}
+				}
+			); 
+		};
+
+		voicePlatformService.sendMeRequest(
 			function(data) {
+				$log.info("Received me request - " + JSON.stringify(data));
 
 				var locCountry = 'others';
 
@@ -66,31 +109,5 @@ angular.module('genie', [
 				$log.info("User is not authenticated.");
 			}
 		);
-
-		$scope.login = function() {
-			$log.info("Sending login request for user - " + $scope.email);
-
-			voicePlatformService.login($scope.email, 
-				function() {
-					$log.info("Login succeeded");
-				},
-				function(error) {
-					$log.warn("Failed to submit login request : " + error);
-					$scope.error = error;
-				});
-		};
-
-		$scope.pin = function() {
-			voicePlatformService.pin($scope.pin, 
-				function() {
-					$log.info("Successfully sent pin request. Refreshing...")
-					$route.reload();
-				},
-				function(error) {
-					$log.warn("Failed to submit pin request : " + error);
-					$scope.error = error;
-				}
-			); 
-		};
 	}
 ]);

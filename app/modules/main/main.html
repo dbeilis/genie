@@ -2,15 +2,18 @@
 
 	<div class="form-group">
 		<label for="exampleInputEmail1">Email address</label>
-		<input type="email" class="form-control" id="exampleInputEmail">
+		<input type="email" class="form-control" id="exampleInputEmail" ng-model="email">
+		<span class="form-control-feedback"><span class="fonticon icon-alert-circle" ng-show="emailError"></span>{{emailError}}</span>
 	</div>
-	<button class="btn btn-default call-button">Call</button>
+	<button class="btn btn-default call-button" ng-click="onLoginClick()">Call</button>
 
 	<div class="form-group">
 		<label for="exampleInputPin">Pin</label>
-		<input type="tel" class="form-control" id="exampleInputPin">
+		<input type="tel" class="form-control" id="exampleInputPin" ng-model="pin">
+		<span class="form-control-feedback"><span class="fonticon icon-alert-circle" ng-show="pinError"></span>{{pinError}}</span>
 	</div>
-	<button class="btn btn-default auth-button">Login</button>
+	<button class="btn btn-default auth-button" ng-click="onPinClick()">Login</button>
+	
 </div>
 
 <div id="auth_screen" ng-show="me">

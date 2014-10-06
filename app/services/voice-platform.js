@@ -9,7 +9,7 @@ angular.module('genie')
 
             var self = this;
 
-            this.me = function(success, failure) {
+            this.sendMeRequest = function(success, failure) {
                 var serviceUrl = voicePlatformUri + '/chats/me';
 
                 $http.get(serviceUrl).
@@ -25,7 +25,7 @@ angular.module('genie')
                     });
             };
 
-            this.login = function(email, success, failure) {
+            this.sendLoginRequest = function(email, success, failure) {
                 var serviceUrl = voicePlatformUri + '/chats/login';
 
                 $http.post(serviceUrl, {'email': email}).
@@ -41,10 +41,10 @@ angular.module('genie')
                     });
             };
 
-            this.pin = function(pin, success, failure) {
+            this.sendPinRequest = function(pin, success, failure) {
             	var serviceUrl = voicePlatformUri + '/chats/pin';
 
-                http.post(serviceUrl, {'pin': pin}).
+                $http.post(serviceUrl, {'pin': pin}).
                     success(function(data, status) {
                     	if (data && data.status && data.status === 'ok' && success) {
                     		success(data);
@@ -57,7 +57,7 @@ angular.module('genie')
                     });
             };
 
-            this.token = function(success, failure) {
+            this.sendTokenRequest = function(success, failure) {
                 var serviceUrl = voicePlatformUri + '/chats/token';
 
                 $http.get(serviceUrl).
@@ -73,7 +73,7 @@ angular.module('genie')
                     });
             };
 
-            this.logout = function(success, failure) {
+            this.sendLogoutRequest = function(success, failure) {
 
             	var serviceUrl = voicePlatformUri + '/chats/logout';
 
