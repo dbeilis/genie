@@ -6,7 +6,7 @@
   "minimum_chrome_version": "23",
   "app": {
     "background": {
-      "scripts": ["main/main.js"]
+      "scripts": ["modules/main/main.js"]
     }
   },
   "icons": {

@@ -1,5 +1,36 @@
 // Create instance of chat widget
 
+var isAuthenticated = false;
+
+function registerHandlers() {
+
+	$(".call-button").click(function(){
+		var emailAddr = $(".").value;
+		voicePlatform.call(emailAddr, 
+			function(){
+				// onSuccess
+			},
+			function() {
+				// onError
+			});
+	});
+
+	$(".auth-button").click(function(){
+		var pin = $(".").value;
+		voicePlatform.auth(pin, 
+			function(){
+				// onSuccess
+			},
+			function() {
+				// onError
+			});
+	});
+};
+
+function updateAuthMode(){
+	
+};
+
 // HTTC Transport Version
 var oChatUI = new GenesysChatUI($, $("#chat_panel"),
 	Transport_REST_HTTC, {

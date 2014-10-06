@@ -7,13 +7,13 @@
 		<link type="text/css" rel="stylesheet" href="bower_components/ark-style/dist/css/ark-css.css"/>		
 		<script src="bower_components/jquery/jquery-1.11.1.min.js"></script>
 
-		<link type="text/css" rel="stylesheet" href="chat_widget/chat.css"/>
-		<script src="chat_widget/chat-api-lite.js"></script>
-		<script src="chat_widget/transport/chat_transport_rest_httc.js"></script>
-		<script src="chat_widget/transport/chat_transport_websocket.js"></script>
-		<script src="chat_widget/chat.js"></script>
+		<link type="text/css" rel="stylesheet" href="modules/chat_widget/chat.css"/>
+		<script src="modules/chat_widget/chat-api-lite.js"></script>
+		<script src="modules/chat_widget/transport/chat_transport_rest_httc.js"></script>
+		<script src="modules/chat_widget/transport/chat_transport_websocket.js"></script>
+		<script src="modules/chat_widget/chat.js"></script>
 
-		<link type="text/css" rel="stylesheet" href="main/main.css"/>
+		<link type="text/css" rel="stylesheet" href="modules/main/main.css"/>
 	</head>
 	<body>
 
@@ -22,24 +22,24 @@
 				<label for="exampleInputEmail1">Email address</label>
 				<input type="email" class="form-control" id="exampleInputEmail">
 			</div>
-			<button class="btn btn-default">Call</button>
+			<button class="btn btn-default call-button">Call</button>
 
 			<div class="form-group">
 				<label for="exampleInputPin">Pin</label>
 				<input type="tel" class="form-control" id="exampleInputPin">
 			</div>
-			<button class="btn btn-default">Login</button>
+			<button class="btn btn-default auth-button">Login</button>
 		</div>
 
 		<div id="chat_panel" class="ChatUI">
 			<div class="transcript"></div>
 			<div class="input-container">
-				<textarea class="input" placeholder="Type something like: 'Tell me about John Smith'"></textarea>
+				<textarea class="input" placeholder="Try: 'Tell me about John Smith'"></textarea>
 			</div>
 			<div class="isTyping"></div>
 		</div>
 
-		<script src="main/index.js"></script>
+		<script src="modules/main/index.js"></script>
 
 	</body>
 </html>
