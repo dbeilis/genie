@@ -14,7 +14,7 @@ angular.module('genie')
 
                 $http.get(serviceUrl).
                     success(function(data, status) {
-                    	if (data && data.status && data.status === 'ok' && success) {
+                    	if (data && data.status && (data.status === 'okay' || data.status === 'ok') && success) {
                     		success(data);
                     	} else {
                     		failure(data);
@@ -30,7 +30,7 @@ angular.module('genie')
 
                 $http.post(serviceUrl, {'email': email}).
                     success(function(data, status) {
-                    	if (data && data.status && data.status === 'ok' && success) {
+                    	if (data && data.status && (data.status === 'okay' || data.status === 'ok') && success) {
                     		success(data);
                     	} else {
                     		failure(data);
@@ -42,7 +42,7 @@ angular.module('genie')
             };
 
             this.sendPinRequest = function(pin, success, failure) {
-            	var serviceUrl = voicePlatformUri + '/chats/pin';
+            	var serviceUrl = voicePlatformUri + '/chats/enter_pin';
 
                 $http.post(serviceUrl, {'pin': pin}).
                     success(function(data, status) {
@@ -57,21 +57,7 @@ angular.module('genie')
                     });
             };
 
-            this.sendTokenRequest = function(success, failure) {
-                var serviceUrl = voicePlatformUri + '/chats/token';
-
-                $http.get(serviceUrl).
-                    success(function(data, status) {
-                        if (data && data.status && data.status === 'ok' && success) {
-                            success(data);
-                        } else {
-                            failure(data);
-                        }
-                    }).
-                    error(function(data,status){
-                        failure(data);
-                    });
-            };
+            
 
             this.sendLogoutRequest = function(success, failure) {
 

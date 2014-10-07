@@ -27,15 +27,22 @@ angular.module('genie', [
 			$log.info("Sending login request for user - " + $scope.email);
 
 			voicePlatformService.sendLoginRequest($scope.email, 
-				function() {
+				function(data) {
 					$log.info("Login succeeded");
+					$scope.emailError = "Dialing... Please enter pin number below once received.";	
 				},
 				function(error) {
 					$log.warn("Failed to submit login request : " + error);
+					no_phone|no_employee|out_call_error
 					if (error && error.status) {
-						if (error.status === 'no_employee') {
+						no_phone|no_employee|out_call_error
+						if (error.status === 'no_phone') {
+							$scope.emailError = "Could not phone number for employee";
+						} else if (error.status === 'no_employee') {
 							$scope.emailError = "Could not find employee";
-						} else {
+						} else if (error.status === 'out_call_error') {
+							$scope.emailError = "Failed to dial. Please retry...";
+						} else{
 							$scope.emailError = "Unknown error. Please contact support.";
 						}
 					}
@@ -88,22 +95,26 @@ angular.module('genie', [
 				};
 
 				$scope.config = {
-					'webSocketAddr': data.websocketDomainPort
+					'webSocketAddr': data.websocketDomainPort,
+					'token': data.token 
 				};
 
-				// Initialize WebSocket Transport for messaging 
-				voicePlatformService.token(
-					function(data){
-						$log.info("Successfully got the token " + data.token);
+				// HTTC Transport Version
+				var oChatUI = new GenesysChatUI($, $("#chat_panel"),
+					Transport_REST_HTTC, {
+						id : "515a4376-ac30-4ed2-801f-a876c0d56c93",
+						dataURL : "https://genesysvoice.com:8080/gcfd/servlets/chats/api/v2/chats/",
+						context : "demo"
+					}
 
-						$scope.config.tocket = data.token;
+					// Transport_WebSocket, {
+					// 	id : "",
+					// 	dataURL : "wss://genesysvoice.com:8080/gcfd/websockets/messaging",
+					// 	context : "demo"
+					// }
+				);
 
-						// TODO: initialize websocket
-					},
-					function(){
-						$log.warn("Failed to retrieve token from voice platform. Redirecting to login...");
-						$route.reload();
-					});
+				oChatUI.startSession();
 			},
 			function(data) {
 				$log.info("User is not authenticated.");
