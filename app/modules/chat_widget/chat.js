@@ -222,14 +222,44 @@ function GenesysChatUI($, ndContainer, oTransport, oTransportData){
         oElements.Input.val("");
     }
 
+    function loadContactImage(imgControl, url) {
+
+    }
+
     function addMessage(sName, sText, bAgent, bSystemMessage){
         
         var ndMessage = $("<p><span class='name'></span></p>");
 
         ndMessage.addClass((bSystemMessage)?"system":"").addClass((bAgent)?"them":"you");
+
+        if (bAgent) {
+            if (sName === 'CFD') {
+                sName = '1-800-Genesys';
+            }
+
+            /*
+             * Regex to parse a feedback such as this:
+             *  David Beilis<br/><img src='http://gore.genesyslab.com/orep/images/employees/jpg/LK0078424.jpg' /><br/>Manager, Development 2, based in Markham, Canada.<br/> 
+             */
+
+            // var re = "(\w+\s\w+)<br\/><img src=\'(.*)\'\s\/><br\/>(.*)\,\sbased\sin\s(\w+)\,\s(\w+)\.<br\/>";
+            // var myArray = sText.match(re);
+            // if (myArray && myArray.length > 4) {
+            //     var contactCard = {
+            //         'name': myArray[0],
+            //         'avatar': myArray[1],
+            //         'title': myArray[2],
+            //         'locCity': myArray[3],
+            //         'locCountry': myArray[4]
+            //     };
+            //     console.log("Received card: " + JSON.stringify(contactCard));
+            // }
+
+            
+        }
+        
         ndMessage.append(sText);
         ndMessage.find(".name").text(sName);
-            
         oElements.Transcript.append(ndMessage);
 
         ndMessage.fadeIn();

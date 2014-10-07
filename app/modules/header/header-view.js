@@ -1,5 +1,5 @@
 angular.module('components',[])
-.directive('headerView', function(){
+.directive('headerView', function($log){
 	return {
         templateUrl: 'modules/header/header-view.html',
         restrict: 'E',
@@ -8,6 +8,7 @@ angular.module('components',[])
         	contact: "="
         },
         link: function(scope) {
+            $log.info("Rendering header...");
 	    }
     };
 })
