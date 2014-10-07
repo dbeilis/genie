@@ -1,4 +1,4 @@
-<div id="registration_screen" role="form" ng-show="!contact">
+<div id="registration_screen" role="form" ng-if="!contact">
 
 	<div class="form-group">
 		<label for="exampleInputEmail1">Email address</label>
@@ -16,10 +16,10 @@
 	
 </div>
 
-<div id="auth_screen" ng-show="contact">
+<div id="auth_screen" ng-if="contact">
 
-	<header contact="contact">
-	</header>
+	<header-view contact="contact">
+	</header-view>
 
 	<div id="chat_panel" class="ChatUI">
 		<div class="transcript"></div>
@@ -28,7 +28,5 @@
 		</div>
 		<div class="isTyping"></div>
 	</div>
-
-	<script src="modules/main/index.js"></script>
 
 </div>

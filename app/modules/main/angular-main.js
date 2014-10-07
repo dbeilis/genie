@@ -2,7 +2,8 @@ angular.module('genie', [
 	'ngCookies',
     'ngResource',
     'ngRoute',
-    'jquery'
+    'jquery',
+    'components'
    ])
 
 .config(function($routeProvider, $httpProvider) {
@@ -19,8 +20,8 @@ angular.module('genie', [
 
 })
 
-.controller('GenieController', ['$scope', '$log', '$route', 'voicePlatformService',
-	function($scope, $log, $route, voicePlatformService) {
+.controller('GenieController', ['$scope', '$log', '$route', '$timeout', 'voicePlatformService',
+	function($scope, $log, $route, $timeout, voicePlatformService) {
 		$log.info("Angular Genie has started. Sending me request...");
 
 		$scope.onLoginClick = function() {
@@ -99,23 +100,27 @@ angular.module('genie', [
 					'token': data.token 
 				};
 
-				// HTTC Transport Version
-				var oChatUI = new GenesysChatUI($, $("#chat_panel"),
-					Transport_REST_HTTC, {
-						id : "515a4376-ac30-4ed2-801f-a876c0d56c93",
-						dataURL : "https://genesysvoice.com:8080/gcfd/servlets/chats/api/v2/chats/",
-						context : "demo"
-					}
+				$timeout(function() {
+					// HTTC Transport Version
+					var oChatUI = new GenesysChatUI($, $("#chat_panel"),
+						Transport_REST_HTTC, {
+							id : "515a4376-ac30-4ed2-801f-a876c0d56c93",
+							dataURL : "https://genesysvoice.com:8080/gcfd/servlets/chats/api/v2/chats/",
+							context : "demo"
+						}
 
-					// Transport_WebSocket, {
-					// 	id : "",
-					// 	dataURL : "wss://genesysvoice.com:8080/gcfd/websockets/messaging",
-					// 	context : "demo"
-					// }
-				);
+						// Transport_WebSocket, {
+						// 	id : "",
+						// 	dataURL : "wss://genesysvoice.com:8080/gcfd/websockets/messaging",
+						// 	context : "demo"
+						// }
+					);
 
-				oChatUI.startSession();
-			},
+					oChatUI.startSession();
+	
+				}, 10, false);
+
+							},
 			function(data) {
 				$log.info("User is not authenticated.");
 			}
