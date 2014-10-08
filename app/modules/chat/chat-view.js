@@ -12,8 +12,8 @@ angular.module('chat',[])
     	    }
         };
     })
-    .controller('ChatController', ['$scope', '$log', 'chatWebsocketTransportService', 
-        function($scope, $log, chatWebsocketTransportService) {
+    .controller('ChatController', ['$scope', '$log', '$timeout', 'chatWebsocketTransportService', 
+        function($scope, $log, $timeout, chatWebsocketTransportService) {
 
             $scope.error = null;
 
@@ -23,12 +23,21 @@ angular.module('chat',[])
                 });
             };
 
-            this.sendMessage = function(transport, nickname, subject) {
+            this.sendChatRequest = function(transport, nickname, subject) {
                 chatWebsocketTransportService.sendMessage(transport, {
                     "type": "chat_request","message": {
                         "operationName": "chat request",
                         "nickname": nickname,
                         "subject": subject
+                    }
+                })
+            };
+
+            this.sendChatMessage = function(transport, text) {
+                chatWebsocketTransportService.sendMessage(transport, {
+                    "type": "chat_client_message","message": {
+                        "operationName": "SendMessage",
+                        "text": text
                     }
                 })
             };
@@ -46,9 +55,12 @@ angular.module('chat',[])
                     'onopen' : function(event) {
                         $log.info("Connection is established. Sending token...");
                         this.sendAuthToken(transport, $scope.config.token);
+                        $timeout(function() {
+                            this.sendChatRequest(transport, 'nickname', 'subject');
+                        }.bind(this), 10);
                     }.bind(this),
                     'onmessage' : function(event) {
-                        this.sendNotification(event.data);
+                        // TODO...
                     },
                     'onclose' : function(event) {
 
@@ -62,21 +74,20 @@ angular.module('chat',[])
                 // TODO: failed to create 
             } else {
 
+                $scope.sendMessage = function () {
+                    this.sendChatMessage(transport, $scope.messageText);
+                    $scope.messageText = "";
+                }.bind(this);
+
                 $scope.disconnect = function() {
                     $log.info("Chat is disconnecting...");
-                    if (transport) {
-                        chatWebsocketTransportService.disconnect(transport);
-                    }
+                    chatWebsocketTransportService.disconnect(transport);
                 }
 
-                var side = 'left';
+                // var side = 'left';
 
-                // Messages, client info & sending
-                $scope.messages = [];
-                $scope.sendMessage = function () {
-                    // server.sendNgChatMessage($scope.messageText);
-                    $scope.messageText = "";
-                };
+                // // Messages, client info & sending
+                // $scope.messages = [];
 
                 // Occurs when we receive chat messages
                 // server.ngChatMessagesInform = function (p) {
@@ -95,11 +106,6 @@ angular.module('chat',[])
                 //     // flip the side
                 //     side = side == 'left' ? 'right' : 'left';
                 // };
-
-                // Once connected, we need to join the chat
-                // server.onConnect(function () {
-                //     server.joinNgChat();
-                // });
 
                 var notifications;
 
