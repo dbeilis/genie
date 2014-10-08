@@ -1,4 +1,4 @@
-angular.module('components',[])
+angular.module('header',[])
 .directive('headerView', function($log){
 	return {
         templateUrl: 'modules/header/header-view.html',

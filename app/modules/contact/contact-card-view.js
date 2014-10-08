@@ -1,11 +1,16 @@
-angular.module('components',[])
+angular.module('contact-card',[])
 .directive('contactCardView', function($log){
 	return {
-        templateUrl: 'modules/contact-view/contact-card-view.html',
+        templateUrl: 'modules/contact/contact-card-view.html',
         restrict: 'E',
         transclude: true,
         scope: {
-        	contactCard: "="
+        	name: "=",
+            image: "=",
+            title: "=",
+            locCity: "=",
+            locCountry: "=",
+            supervisor: "="
         },
         link: function(scope) {
             $log.info("Rendering contact card...");

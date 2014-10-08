@@ -3,7 +3,8 @@ angular.module('genie', [
     'ngResource',
     'ngRoute',
     'jquery',
-    'components'
+    'header',
+    'contact-card'
    ])
 
 .config(function($routeProvider, $httpProvider) {
@@ -34,9 +35,7 @@ angular.module('genie', [
 				},
 				function(error) {
 					$log.warn("Failed to submit login request : " + error);
-					no_phone|no_employee|out_call_error
 					if (error && error.status) {
-						no_phone|no_employee|out_call_error
 						if (error.status === 'no_phone') {
 							$scope.emailError = "Could not phone number for employee";
 						} else if (error.status === 'no_employee') {

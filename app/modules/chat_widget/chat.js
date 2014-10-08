@@ -237,28 +237,31 @@ function GenesysChatUI($, ndContainer, oTransport, oTransportData){
                 sName = '1-800-Genesys';
             }
 
-            /*
-             * Regex to parse a feedback such as this:
-             *  David Beilis<br/><img src='http://gore.genesyslab.com/orep/images/employees/jpg/LK0078424.jpg' /><br/>Manager, Development 2, based in Markham, Canada.<br/> 
-             */
-
-            // var re = "(\w+\s\w+)<br\/><img src=\'(.*)\'\s\/><br\/>(.*)\,\sbased\sin\s(\w+)\,\s(\w+)\.<br\/>";
-            // var myArray = sText.match(re);
-            // if (myArray && myArray.length > 4) {
-            //     var contactCard = {
-            //         'name': myArray[0],
-            //         'avatar': myArray[1],
-            //         'title': myArray[2],
-            //         'locCity': myArray[3],
-            //         'locCountry': myArray[4]
-            //     };
-            //     console.log("Received card: " + JSON.stringify(contactCard));
-            // }
-
+            var re = /(\w+\s\w+)<br\/><img src=\'(.*)\'\s\/><br\/>(.*)\,\sbased\sin\s(\w+)\,\s(\w+)\.<br\/>\sHis\smanager\sis\s(\w+\s\w+)\.<br\/>/g; 
+            var m = re.exec(sText);
             
+            if (m && m.length > 6) {
+                var contactCard = {
+                    'name': m[1],
+                    'image': m[2],
+                    'title': m[3],
+                    'locCity': m[4],
+                    'locCountry': m[5],
+                    'supervisor': m[6]
+                };
+                console.log("Received card: " + JSON.stringify(contactCard));
+                ndMessage.append('<contact-card-view name="' + /*m[1]*/ 'David_Beilis' 
+                    + '" image="'+ m[2] + '" title="' + /*m[3]*/ 'Manager' + /*'" locCity="' + m[4]
+                    + '" locCountry="' + m[5] + */'" supervisor="' + /*m[6]*/ 'David_Konig'+ '"></contact-card-view>');
+            } else {
+                ndMessage.append(sText);
+            }
+   
+        } else {
+            ndMessage.append(sText);
         }
+
         
-        ndMessage.append(sText);
         ndMessage.find(".name").text(sName);
         oElements.Transcript.append(ndMessage);
 
