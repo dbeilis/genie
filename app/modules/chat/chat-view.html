@@ -1,0 +1,21 @@
+<div id="browser-window" ng-controller="ChatController">
+    <div id="viewport">
+        <div id="viewport-content">
+            <div class="bubble-container" ng-repeat="m in messages">
+                <div class="avatar avatar-{{m.side}}"><img src="{{m.avatar}}" /></div>
+                <div class="bubble bubble-{{m.side}}">{{m.text}}</div>
+            </div>
+        </div>
+    </div>
+
+    <form class="row row-chat" ng-submit="sendMessage()">
+        <div class="input-group">
+            <input type="text" class="form-control" ng-model="messageText" placeholder="Type your message" />
+
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-primary">Send</button>
+            </span>
+        </div>
+
+    </form>
+</div>
