@@ -40,7 +40,7 @@ angular.module('genie')
 			this.sendMessage = function(ws, message) {
 				$log.info("Sending message - " + JSON.stringify(message));
 				if (ws !== null) {
-					ws.send(message);
+					ws.send(JSON.stringify(message));
 				}
 			};
 
