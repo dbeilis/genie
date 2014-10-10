@@ -91,7 +91,7 @@ angular.module('genie', [
 					'email' : data.email,
 					'fullPrefName': data.fullPrefName,
 					'locationImage': 'images/me/' + locCountry + '/' + locCity + '.png',
-					'avatar': data.pictureUrl,
+					'pictureUrl': data.pictureUrl,
 					'busy': data.busy
 				};
 
@@ -104,27 +104,7 @@ angular.module('genie', [
 
 				$log.info("Transport config: " + JSON.stringify($scope.transportConfig));
 
-				$timeout(function() {
-					// HTTC Transport Version
-					// var oChatUI = new GenesysChatUI($, $("#chat_panel"),
-					// 	Transport_REST_HTTC, {
-					// 		id : "515a4376-ac30-4ed2-801f-a876c0d56c93",
-					// 		dataURL : "https://genesysvoice.com:8080/gcfd/servlets/chats/api/v2/chats/",
-					// 		context : "demo"
-					// 	}
-
-					// 	// Transport_WebSocket, {
-					// 	// 	id : "",
-					// 	// 	dataURL : "wss://genesysvoice.com:8080/gcfd/websockets/messaging",
-					// 	// 	context : "demo"
-					// 	// }
-					// );
-
-					// oChatUI.startSession();
-	
-				}, 10, false);
-
-							},
+			},
 			function(data) {
 				$log.info("User is not authenticated.");
 			}

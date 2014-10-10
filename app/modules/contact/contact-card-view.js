@@ -8,7 +8,29 @@ angular.module('contact-card',[])
             	contact: "="
             },
             link: function(scope) {
+
                 $log.info("Rendering contact card...");
+
+                scope.coverPhotoBg = "background-image:url('../../images/locations/card/others/other_locations_day.png')";
+                scope.profilePictureBg = "background-image:url('../../images/loading.gif')";
+
+                var loadImage = function(uri, callback) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.responseType = 'blob';
+                    xhr.onload = function() {
+                        callback(window.URL.createObjectURL(xhr.response), uri);
+                    }
+                    xhr.open('GET', uri, true);
+                    xhr.send();
+                }
+
+                if (scope.contact.pictureUrl) {
+                    loadImage(scope.contact.pictureUrl, function(blobUri, requesteUri) {
+                        scope.profilePictureBg = "background-image:url('" + blobUri + "')";
+                        scope.$apply();
+                    });
+                }
+          
     	    }
         };
     })
