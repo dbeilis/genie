@@ -3,7 +3,7 @@
         <div id="viewport-content">
             <div class="bubble-container" ng-repeat="m in messages">
                 <div ng-if="m.msgType !== 'tma'">
-                    <div class="avatar avatar-{{m.side}}"><img src="{{m.avatar}}" /></div>
+                    <!-- div class="avatar avatar-{{m.side}}"><img src="{{m.avatar}}" /></div -->
                     <div class="bubble bubble-{{m.side}}">{{m.text}}</div>
                 </div>
                 <contact-card-view ng-if="m.msgType === 'tma'" contact="m.text"></contact-card-view>

@@ -50,9 +50,9 @@ angular.module('chat',[])
 
                 if (data && data.type === 'chat_server_message') {
                     if (data.message && data.message.participant && data.message.text) {
-                        var side = 'left';
+                        var side = 'right';
                         if (data.message.participant.type === 'Customer') {
-                            side = 'right';
+                            side = 'left';
                         }
 
                         $scope.messages.push({
