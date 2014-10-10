@@ -5,12 +5,7 @@ angular.module('contact-card',[])
             restrict: 'E',
             transclude: true,
             scope: {
-            	name: "=",
-                image: "=",
-                title: "=",
-                locCity: "=",
-                locCountry: "=",
-                supervisor: "="
+            	contact: "="
             },
             link: function(scope) {
                 $log.info("Rendering contact card...");

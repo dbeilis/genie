@@ -57,6 +57,7 @@ angular.module('chat',[])
 
                         $scope.messages.push({
                             avatar: "images/avatar.png",
+                            msgType: data.message.msgType,
                             text: data.message.text,
                             side: side
                         });
