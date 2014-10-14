@@ -10,14 +10,15 @@
   overflow: hidden;
 }
 
-.g-widget > .g-cover > img {
+.g-widget > .g-cover > .g-bk-image {
   width: 100%;
+  background-size: 100%;
   height: auto;
   min-height: 160px;
   border-radius: 4px 4px 0 0;
 }
 
-.g-widget > .photo {
+.g-widget > .g-cover > .photo {
   position: absolute;
   top: 85px;
   left: 50%;

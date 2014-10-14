@@ -1,5 +1,5 @@
 angular.module('header',[])
-    .directive('headerView', function($log){
+    .directive('headerView', function($log, genesysLocationService){
     	return {
             templateUrl: 'modules/header/header-view.html',
             restrict: 'E',
@@ -20,6 +20,14 @@ angular.module('header',[])
                     }
                     xhr.open('GET', uri, true);
                     xhr.send();
+                }
+
+                if (scope.contact.country && scope.contact.city) {
+                    var coverPhotoBgUrl = genesysLocationService.getImageByLocation(
+                        genesysLocationService.IMAGE_TYPE.CARD,
+                        genesysLocationService.IMAGE_TIME.DAY,
+                        scope.contact.country, scope.contact.city);
+                    scope.coverPhotoBg = "background-image:url('" + coverPhotoBgUrl + "')";
                 }
 
                 if (scope.contact.pictureUrl) {

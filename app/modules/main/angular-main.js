@@ -76,21 +76,11 @@ angular.module('genie', [
 		voicePlatformService.sendMeRequest(
 			function(data) {
 				$log.info("Received me request - " + JSON.stringify(data));
-
-				var locCountry = 'others';
-
-				if (data.officeCountry === 'United States') {
-					locCountry = 'us';
-				} else if (data.officeCountry === 'Canada') {
-					locCountry = 'ca';
-				}
-
-				var locCity = 'other_locations_day';
-
 				$scope.contact = {
 					'email' : data.email,
 					'fullPrefName': data.fullPrefName,
-					'locationImage': 'images/me/' + locCountry + '/' + locCity + '.png',
+					'country': data.officeCountry,
+					'city':data.officeCity,
 					'pictureUrl': data.pictureUrl,
 					'busy': data.busy
 				};

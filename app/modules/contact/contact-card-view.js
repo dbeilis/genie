@@ -1,5 +1,5 @@
 angular.module('contact-card',[])
-    .directive('contactCardView', function($log){
+    .directive('contactCardView', function($log, genesysLocationService){
     	return {
             templateUrl: 'modules/contact/contact-card-view.html',
             restrict: 'E',
@@ -29,6 +29,14 @@ angular.module('contact-card',[])
                         scope.profilePictureBg = "background-image:url('" + blobUri + "')";
                         scope.$apply();
                     });
+                }
+
+                if (scope.contact.country && scope.contact.city) {
+                    var coverPhotoBgUrl = genesysLocationService.getImageByLocation(
+                        genesysLocationService.IMAGE_TYPE.CARD,
+                        genesysLocationService.IMAGE_TIME.DAY,
+                        scope.contact.country, scope.contact.city);
+                    scope.coverPhotoBg = "background-image:url('" + coverPhotoBgUrl + "')";
                 }
           
     	    }
