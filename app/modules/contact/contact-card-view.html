@@ -1,12 +1,18 @@
 <div class="portfoliocard">
 	<div class="coverphoto" style="{{coverPhotoBg}}">
 	</div>
-	<div class="profile_picture {{availability}}" style="{{profilePictureBg}}">
+  <div class="profile_picture {{availability}}" style="{{profilePictureBg}}">
 	</div>
-	<div class="left_col">
-	</div>
-	<div class="right_col">
+  
+  <div class="title_col">
 		<h2 class="name">{{contact.firstName}} {{contact.lastName}}</h2>
-		<h3 class="location">{{contact.title}}</h3>
+		<h4 class="description">{{contact.title}}</h4>
 	</div>
+	
+  <div class="event_desc">
+    <h3 class="description">{{contact.firstName}} reports to {{contact.managerName}}</h3>
+    <span style="padding-left: 30px;">{{availability_desc}}</span>
+  </div>
+  
 </div>
+

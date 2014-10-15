@@ -1,13 +1,14 @@
 #browser-window{
-	height: 538px;
+	height: auto;
 	padding: 49px 25px 10px 25px;
-	margin: auto;
-	position:relative;
+	position:absolute;
+	bottom: 0px;
 }
 
 #viewport{
 	overflow:hidden;
 	height: 420px;
+	margin-bottom: 25px;
 }
 
 #viewport-content{
@@ -16,9 +17,7 @@
 }
 
 .row-chat{
-	position:absolute;
-	bottom: 20px;
-	margin: 0;
+	position:relative;
 }
 
 .bubble-container{

@@ -65,7 +65,7 @@ angular.module('chat',[])
 
                         // Animate
                         $("#viewport-content").animate({
-                            bottom: $("#viewport-content").height() - $("#viewport").height()
+                            bottom: $("#viewport-content").height() - $("#viewport").height() + 10
                         }, 250);
                     }
                 }
