@@ -13,6 +13,12 @@ angular.module('contact-card',[])
 
                 scope.coverPhotoBg = "background-image:url('../../images/locations/card/others/other_locations_day.png')";
                 scope.profilePictureBg = "background-image:url('../../images/loading.gif')";
+                scope.availability = "";
+                if (scope.contact.availability === "true") {
+                    scope.availability = "free";
+                } else if (scope.contact.availability === "false") {
+                    scope.availability = "busy";
+                } 
 
                 var loadImage = function(uri, callback) {
                     var xhr = new XMLHttpRequest();
@@ -33,7 +39,6 @@ angular.module('contact-card',[])
 
                 if (scope.contact.country && scope.contact.city) {
                     var coverPhotoBgUrl = genesysLocationService.getImageByLocation(
-                        genesysLocationService.IMAGE_TYPE.CARD,
                         genesysLocationService.IMAGE_TIME.DAY,
                         scope.contact.country, scope.contact.city);
                     scope.coverPhotoBg = "background-image:url('" + coverPhotoBgUrl + "')";

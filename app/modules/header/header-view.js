@@ -24,7 +24,6 @@ angular.module('header',[])
 
                 if (scope.contact.country && scope.contact.city) {
                     var coverPhotoBgUrl = genesysLocationService.getImageByLocation(
-                        genesysLocationService.IMAGE_TYPE.CARD,
                         genesysLocationService.IMAGE_TIME.DAY,
                         scope.contact.country, scope.contact.city);
                     scope.coverPhotoBg = "background-image:url('" + coverPhotoBgUrl + "')";

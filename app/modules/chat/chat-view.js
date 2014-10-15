@@ -85,7 +85,7 @@ angular.module('chat',[])
                         }.bind(this),
                         'onclose' : function(event) {
                             this.connect(url);
-                        },
+                        }.bind(this),
                         'onerror' : function(event) {
                             $scope.error = event;
                         }

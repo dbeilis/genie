@@ -58,23 +58,18 @@ angular.module('genie')
 				"Venezuela": ["Venezuela"]
 			};
 
-			this.IMAGE_TYPE = {
-				ME: "me", 
-				CARD: "card"
-			};
-
 			this.IMAGE_TIME = {
 				DAY: "Day", 
 				NIGHT: "Night"
 			};
 
-			this.getImageByLocation = function(type, time, country, city) {
+			this.getImageByLocation = function(time, country, city) {
 				$log.info("Getting image  - " + city + " in "+ country);
 
 				var image = "../../images/locations/others/other_locations_Day.png";
 
 				if (country && city) {
-					image = "../../images/locations/" + type + "/" + country + "/" + city + "_" + time + ".png";
+					image = "../../images/locations/" + country + "/" + city + "_" + time + ".png";
 				}
 
 				return image;
