@@ -7,7 +7,7 @@ a.nostyle{
 div.portfoliocard{
 	position:relative;
 	width:400px;
-  	height:262px;
+  	height:270px;
 	background:rgba(255,255,255,1);
 	box-shadow:0px -1px 3px rgba(0,0,0,0.1),
 				0px 2px 6px rgba(0,0,0,0.5);
@@ -35,7 +35,7 @@ div.portfoliocard div.profile_picture{
 	background:rgba(255,255,255,1);
 	position:absolute;
 	top:10px;
-	left:40px;
+	left:30px;
 	border-radius:100%;
 	background-size:100% 100%;
 	padding:7px;
@@ -55,7 +55,7 @@ div.portfoliocard div.title_col{
 	position: absolute;
 	top: 0px;
 	right: 0px;
-	width: 55%;
+	width: 60%;
 	box-sizing:border-box;
 }
 
