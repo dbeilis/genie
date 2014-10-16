@@ -1,4 +1,4 @@
-<div class="portfoliocard">
+<div class="portfoliocard" ng-contoller>
 	<div class="coverphoto" style="{{coverPhotoBg}}">
 	</div>
   <div class="profile_picture {{availability}}" style="{{profilePictureBg}}">
@@ -10,8 +10,9 @@
 	</div>
 	
   <div class="event_desc">
-  	<span style="padding-left: 20px;">{{pronoun}} is based in <strong>{{contact.city}}, {{contact.country}}</strong> and {{possessive}} manager is <strong>{{contact.managerName}}</strong><BR></span>
-    <span style="padding-left: 20px;">{{availability_desc}}</span>
+  	<span style="padding-left: 15px;">{{pronoun}} is based in <strong>{{contact.city}}, {{contact.country}}</strong></span><BR> 
+  	<span ng-click="querySupervisor()" style="padding-left: 15px;">{{possessive}} manager is <strong>{{contact.managerName}}</strong></span><BR>
+    <span style="padding-left: 15px;">{{availability_desc}}</span>
   </div>
   
 </div>

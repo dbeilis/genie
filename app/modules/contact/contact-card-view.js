@@ -9,13 +9,17 @@ angular.module('contact-card',[])
             },
             link: function(scope) {
 
+                scope.querySupervisor = function() {
+                    $log.console("Requesting tma " + scope.contact.managerName);
+                };
+
                 var updatePersonalizedMessage = function() {
                     
                     scope.pronoun = "He";
-                    scope.possessive = "his";
+                    scope.possessive = "His";
                     if (scope.contact.gender === 'F') {
                         scope.pronoun = "She";
-                        scope.possessive = "her";
+                        scope.possessive = "Her";
                     }
 
                     if (scope.contact.availability === 'NONE') {
@@ -59,8 +63,8 @@ angular.module('contact-card',[])
                                 }
 
                             } else {
-                                var date = new Date(scope.contect.nextChangeAbsoluteTime * 1000);
-                                scope.availability_desc += " until " + date;
+                                var date = new Date(scope.contact.nextChangeAbsoluteTime * 1.0);
+                                scope.availability_desc += " until " + date.toLocaleString();
                             }
 
                         } else {
@@ -84,8 +88,8 @@ angular.module('contact-card',[])
                         scope.availability_desc += " right now.";
 
                         if (scope.contact.nextChangeAbsoluteTime) {
-                            var date = new Date(scope.contect.nextChangeAbsoluteTime * 1000);
-                            scope.availability_desc += scope.pronoun + " will be available on " + date;
+                            var date = new Date(scope.contact.nextChangeAbsoluteTime * 1.0);
+                            scope.availability_desc += " " + scope.pronoun + " will be available on " + date.toLocaleString();
                         }
 
                     }
@@ -121,7 +125,7 @@ angular.module('contact-card',[])
 
                 if (scope.contact.country && scope.contact.city) {
                     var coverPhotoBgUrl = genesysLocationService.getImageByLocation(
-                        genesysLocationService.IMAGE_TIME.NIGHT,
+                        genesysLocationService.IMAGE_TIME.DAY,
                         scope.contact.country, scope.contact.city);
                     scope.coverPhotoBg = "background-image:url('" + coverPhotoBgUrl + "')";
                 }
