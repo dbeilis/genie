@@ -1,5 +1,5 @@
 angular.module('contact-card',[])
-    .directive('contactCardView', function($log, genesysLocationService){
+    .directive('contactCardView', function($rootScope, $log, genesysLocationService){
     	return {
             templateUrl: 'modules/contact/contact-card-view.html',
             restrict: 'E',
@@ -10,7 +10,9 @@ angular.module('contact-card',[])
             link: function(scope) {
 
                 scope.querySupervisor = function() {
-                    $log.console("Requesting tma " + scope.contact.managerName);
+                    $log.info("Requesting tma " + scope.contact.managerName);
+                    // chatWebsocketTransportService.sendMessage(null, "tma " + scope.contact.managerName);
+                    $rootScope.$broadcast('SEND_MSG_TMA', scope.contact.managerName);
                 };
 
                 var updatePersonalizedMessage = function() {

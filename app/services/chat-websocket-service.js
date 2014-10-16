@@ -5,16 +5,16 @@ angular.module('genie')
 
     	var ChatWebsocketTransportService = function() {
 
+    		var ws = null;
+
 			this.connect = function(url, handlers) {
 				$log.info("Creating websocket - " + url);
-
-				var ws = null;
 
 				if ('WebSocket' in window) {
 					ws = new WebSocket(url);
 				} else {
 					$log.info('WebSocket is not supported by this browser.');
-					ws = null;
+					this.ws = null;
 					return;
 				}
 				ws.onopen = function(event) {
@@ -37,19 +37,30 @@ angular.module('genie')
 				return ws;
 			};
 
-			this.sendMessage = function(ws, message) {
+			this.sendMessage = function(_ws, message) {
 				$log.info("Sending message - " + JSON.stringify(message));
-				if (ws !== null) {
-					ws.send(JSON.stringify(message));
+				
+				if (_ws == null) {
+					_ws = ws;
 				}
+
+				if (_ws !== null) {
+					_ws.send(JSON.stringify(message));
+				} 
 			};
 
-			this.disconnect = function(ws) {
+			this.disconnect = function(_ws) {
 				$log.info("Disconnecting...");
-				if (ws !== null) {
-					ws.close();
-					ws = null;
+
+				if (_ws == null) {
+					_ws = ws;
 				}
+
+				if (_ws !== null) {
+					_ws.close();
+					_ws = null;
+				}
+
 			};
 		};
 

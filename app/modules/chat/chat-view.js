@@ -12,12 +12,16 @@ angular.module('chat',[])
     	    }
         };
     })
-    .controller('ChatController', ['$scope', '$log', '$timeout', 'chatWebsocketTransportService', 
-        function($scope, $log, $timeout, chatWebsocketTransportService) {
+    .controller('ChatController', ['$scope', '$rootScope', '$log', '$timeout', 'chatWebsocketTransportService', 
+        function($scope, $rootScope, $log, $timeout, chatWebsocketTransportService) {
 
             $scope.messages = [];
 
             $scope.error = null;
+
+            $rootScope.$on('SEND_MSG_TMA', function(scope, msg) {
+                this.sendChatMessage(transport, "tma " + msg);
+            }.bind(this));
 
             $scope.sendMessage = function () {
                 this.sendChatMessage(transport, $scope.messageText);
