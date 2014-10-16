@@ -83,7 +83,7 @@ angular.module('contact-card',[])
 
                         scope.availability_desc += " right now.";
 
-                        if (scope.contect.nextChangeAbsoluteTime) {
+                        if (scope.contact.nextChangeAbsoluteTime) {
                             var date = new Date(scope.contect.nextChangeAbsoluteTime * 1000);
                             scope.availability_desc += scope.pronoun + " will be available on " + date;
                         }
@@ -121,7 +121,7 @@ angular.module('contact-card',[])
 
                 if (scope.contact.country && scope.contact.city) {
                     var coverPhotoBgUrl = genesysLocationService.getImageByLocation(
-                        genesysLocationService.IMAGE_TIME.DAY,
+                        genesysLocationService.IMAGE_TIME.NIGHT,
                         scope.contact.country, scope.contact.city);
                     scope.coverPhotoBg = "background-image:url('" + coverPhotoBgUrl + "')";
                 }
