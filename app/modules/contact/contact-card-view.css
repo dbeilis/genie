@@ -75,3 +75,7 @@ div.portfoliocard div.event_desc h3.description{
 	padding:0;
 	margin:-5px 10px 10px 30px;
 }
+
+span.hover :hover{
+    text-decoration:underline;
+}

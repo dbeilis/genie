@@ -3,7 +3,7 @@
 angular.module('genie')
     .factory('voicePlatformService', function($resource, $http, $log) {
 
-        var voicePlatformUri = "https://genesysvoice.com:8080" + "/gcfd/servlets";
+        var voicePlatformUri = "https://www.genesysvoice.com" + "/gcfd/servlets";
 
         var VoicePlatformService = function() {
 
