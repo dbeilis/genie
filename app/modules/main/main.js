@@ -7,7 +7,8 @@ chrome.app.runtime.onLaunched.addListener(function() {
     	minWidth: 400,
     	minHeight: 700
     },
-    resizable: true
+    resizable: true,
+    alwaysOnTop: true
   });
 });
 

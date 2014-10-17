@@ -17,6 +17,7 @@
   "permissions": [
     "geolocation",
     "storage",
+    "alwaysOnTopWindows",
     "<all_urls>"
   ]
 }
