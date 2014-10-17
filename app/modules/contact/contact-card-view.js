@@ -79,7 +79,7 @@ angular.module('contact-card',[])
                     } else {
 
                         if (scope.contact.reason === 'OOO_PERSONAL') {
-                            scope.availability_desc += "is taking some time off";
+                            scope.availability_desc += "taking some time off";
                         } else if (scope.contact.reason === 'OOO_BIZ_TRAVEL') {
                             scope.availability_desc += "out of the office on business";
                         } else if (scope.contact.reason === 'OOO_OTHER') {
