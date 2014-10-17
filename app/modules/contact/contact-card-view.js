@@ -103,7 +103,7 @@ angular.module('contact-card',[])
                 $log.info("Rendering contact card...");
 
                 scope.coverPhotoBg = "background-image:url('../../images/locations/card/others/other_locations_day.png')";
-                scope.profilePictureBg = "background-image:url('../../images/loading.gif')";
+                scope.profilePictureBg = "background-image:url('../../images/avatar.png')";
                 scope.availability = "";
                 if (scope.contact.availability === "true") {
                     scope.availability = "free";
