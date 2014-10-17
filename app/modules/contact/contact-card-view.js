@@ -24,6 +24,9 @@ angular.module('contact-card',[])
                         scope.possessive = "Her";
                     }
 
+                    scope.availability_desc = "";
+                    scope.availability_desc_extra = "";
+
                     if (scope.contact.availability === 'NONE') {
                         scope.availability_desc = "Sorry, I don't have " + scope.possessive + " availability information.";
                         return;
@@ -91,7 +94,7 @@ angular.module('contact-card',[])
 
                         if (scope.contact.nextChangeAbsoluteTime) {
                             var date = new Date(scope.contact.nextChangeAbsoluteTime * 1.0);
-                            scope.availability_desc += " " + scope.pronoun + " will be available on " + date.toLocaleString();
+                            scope.availability_desc_extra += " " + scope.pronoun + " will be available on " + date.toLocaleString();
                         }
 
                     }
