@@ -10,7 +10,7 @@ angular.module('header',[])
             link: function(scope) {
                 $log.info("Rendering header for " + scope.contact);
                 
-                scope.headerPictureBg = "background-image:url('../../images/loading.gif')";
+                scope.headerPictureBg = "background-image:url('../../images/avatar.png')";
 
                 var loadImage = function(uri, callback) {
                     var xhr = new XMLHttpRequest();
