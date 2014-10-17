@@ -24,7 +24,13 @@ angular.module('chat',[])
             }.bind(this));
 
             $scope.sendMessage = function () {
-                this.sendChatMessage(transport, $scope.messageText);
+
+                var text = $scope.messageText;
+                if (text && text.toLowerCase().indexOf('tma') < 0 && text.toLowerCase().indexOf('tell') < 0 && text.length > 5)  {
+                    text = "Tell me about " + text;
+                }
+
+                this.sendChatMessage(transport, text);
                 $scope.messageText = "";
             }.bind(this);
 
