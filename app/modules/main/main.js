@@ -3,9 +3,9 @@ chrome.app.runtime.onLaunched.addListener(function() {
     id: 'genie',
     innerBounds: {
     	height: 720,
-    	width: 480,
+    	width: 500,
     	minWidth: 460,
-    	minHeight: 600
+    	minHeight: 700
     },
     resizable: true,
     alwaysOnTop: true
