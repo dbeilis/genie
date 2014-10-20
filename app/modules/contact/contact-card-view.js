@@ -27,7 +27,7 @@ angular.module('contact-card',[])
                     scope.availability_desc = "";
                     scope.availability_desc_extra = "";
 
-                    if (scope.contact.availability === 'NONE') {
+                    if (scope.contact.availability === 'NULL') {
                         scope.availability_desc = "Sorry, I don't have " + scope.possessive + " availability information.";
                         return;
                     } 

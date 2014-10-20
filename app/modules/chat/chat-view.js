@@ -20,7 +20,7 @@ angular.module('chat',[])
             $scope.error = null;
 
             $rootScope.$on('SEND_MSG_TMA', function(scope, msg) {
-                this.sendChatMessage(transport, "tma " + msg);
+                this.sendChatMessage("tma " + msg);
             }.bind(this));
 
             $scope.sendMessage = function () {
@@ -30,23 +30,28 @@ angular.module('chat',[])
                     text = "Tell me about " + text;
                 }
 
-                this.sendChatMessage(transport, text);
+                this.sendChatMessage(text);
                 $scope.messageText = "";
             }.bind(this);
 
+            $scope.refresh = function() {
+                $log.info("Chat is reconnecting...");
+                chatWebsocketTransportService.refresh();
+            };
+
             $scope.disconnect = function() {
                 $log.info("Chat is disconnecting...");
-                chatWebsocketTransportService.disconnect(transport);
-            }
+                chatWebsocketTransportService.disconnect();
+            };
 
-            this.sendAuthToken = function(transport, token) {
-                chatWebsocketTransportService.sendMessage(transport, {
+            this.sendAuthToken = function(token) {
+                chatWebsocketTransportService.sendMessage({
                     "type":"token","message":{"value":token}
                 });
             };
 
-            this.sendChatMessage = function(transport, text) {
-                chatWebsocketTransportService.sendMessage(transport, {
+            this.sendChatMessage = function(text) {
+                chatWebsocketTransportService.sendMessage({
                     "type": "chat_client_message","message": {
                         "operationName": "SendMessage",
                         "text": text
@@ -84,24 +89,24 @@ angular.module('chat',[])
 
             this.connect = function(url) {
                 $log.info("Starting websocket connection to " + url);
-                var transport = chatWebsocketTransportService.connect(url,
-                    {
-                        'onopen' : function(event) {
-                            $log.info("Connection is established. Sending token...");
-                            this.sendAuthToken(transport, $scope.config.token);
-                        }.bind(this),
-                        'onmessage' : function(event) {
-                            this.renderEvent(event);
-                        }.bind(this),
-                        'onclose' : function(event) {
-                            this.connect(url);
-                        }.bind(this),
-                        'onerror' : function(event) {
-                            $scope.error = event;
-                        }
-                    });
+                chatWebsocketTransportService.connect(url, {
+                    'onopen' : function(event) {
+                        $log.info("Connection is established. Sending token...");
+                        this.sendAuthToken($scope.config.token);
+                    }.bind(this),
+                    'onmessage' : function(event) {
+                        this.renderEvent(event);
+                    }.bind(this),
+                    'onclose' : function(event) {
+                    }.bind(this),
+                    'onerror' : function(event) {
+                        $scope.error = event;
+                    },
+                    'onconnecting' : function(event) {
+                        $log.info("Connecting to " + url);
+                    }
+                });
 
-                return transport;
             }.bind(this);
 
             if (!$scope.config || !$scope.config.webSocketAddr || !$scope.config.token) {
@@ -111,7 +116,7 @@ angular.module('chat',[])
             }
 
             var url = $scope.config.webSocketAddr + '/gcfd/websockets/messaging';
-            var transport = this.connect(url);
+            this.connect(url);
 
         }]
     ) 

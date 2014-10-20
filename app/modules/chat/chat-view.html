@@ -1,24 +1,33 @@
-<div id="browser-window" ng-controller="ChatController">
-    <div id="viewport">
-        <div id="viewport-content">
-            <div class="bubble-container" ng-repeat="m in messages">
-                <div ng-if="m.msgType !== 'tma'">
-                    <!-- div class="avatar avatar-{{m.side}}"><img src="{{m.avatar}}" /></div -->
-                    <div class="bubble bubble-{{m.side}}">{{m.text}}</div>
+<div ng-controller="ChatController">
+
+    <form style="position: absolute; right: 20px; z-index: 100;" ng-submit="refresh()">
+        <button type="submit" class="btn btn-primary">Refresh</button>
+    </form>
+
+    <div id="browser-window" >
+
+        <div id="viewport">
+            <div id="viewport-content">
+                <div class="bubble-container" ng-repeat="m in messages">
+                    <div ng-if="m.msgType !== 'tma'">
+                        <!-- div class="avatar avatar-{{m.side}}"><img src="{{m.avatar}}" /></div -->
+                        <div class="bubble bubble-{{m.side}}">{{m.text}}</div>
+                    </div>
+                    <contact-card-view ng-if="m.msgType === 'tma'" contact="m.text"></contact-card-view>
                 </div>
-                <contact-card-view ng-if="m.msgType === 'tma'" contact="m.text"></contact-card-view>
             </div>
         </div>
+
+        <form class="row row-chat" ng-submit="sendMessage()">
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="messageText" placeholder="Ask: Tell me about John Smith" />
+
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </span>
+            </div>
+
+        </form>
     </div>
 
-    <form class="row row-chat" ng-submit="sendMessage()">
-        <div class="input-group">
-            <input type="text" class="form-control" ng-model="messageText" placeholder="Ask: Tell me about John Smith" />
-
-            <span class="input-group-btn">
-                <button type="submit" class="btn btn-primary">Send</button>
-            </span>
-        </div>
-
-    </form>
 </div>
