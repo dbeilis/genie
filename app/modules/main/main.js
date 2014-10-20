@@ -4,8 +4,8 @@ chrome.app.runtime.onLaunched.addListener(function() {
     innerBounds: {
     	height: 720,
     	width: 480,
-    	minWidth: 400,
-    	minHeight: 700
+    	minWidth: 460,
+    	minHeight: 600
     },
     resizable: true,
     alwaysOnTop: true
