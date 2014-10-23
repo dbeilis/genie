@@ -1,4 +1,4 @@
-<div>
+<div class="full-height">
 	<div id="registration_screen" role="form" ng-if="!contact">
 
 		<div class="form-group">
@@ -17,12 +17,12 @@
 		
 	</div>
 
-	<div id="auth_screen" ng-if="contact">
+	<div id="auth_screen" ng-if="contact" class="full-height">
 
 		<header-view contact="contact">
 		</header-view>
 
-		<chat-view config="transportConfig"></chat-view>
+		<chat-view config="transportConfig" style="height: 100%;"></chat-view>
 
 	</div>
 </div>

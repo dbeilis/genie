@@ -65,12 +65,15 @@ angular.module('chat',[])
 
                 if (data && data.type === 'chat_server_message') {
                     if (data.message && data.message.participant && data.message.text) {
-                        var side = 'right';
+                        var side = 'left';
                         if (data.message.participant.type === 'Customer') {
-                            side = 'left';
+                            side = 'right';
                         }
 
+                        var curMessageId = $scope.messages.length;
+
                         $scope.messages.push({
+                            messageId: curMessageId,
                             avatar: "images/avatar.png",
                             msgType: data.message.msgType,
                             text: data.message.text,
@@ -79,9 +82,9 @@ angular.module('chat',[])
                         $scope.$apply();
 
                         // Animate
-                        $("#viewport-content").animate({
-                            bottom: $("#viewport-content").height() - $("#viewport").height() + 10
-                        }, 250);
+                        angular.element("#viewport").animate({
+                            scrollTop:  $("#viewport-content").height()
+                        }, 800);
                     }
                 }
 

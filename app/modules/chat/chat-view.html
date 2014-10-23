@@ -1,33 +1,33 @@
-<div ng-controller="ChatController">
+<div ng-controller="ChatController" class="full-height">
 
-    <form style="position: absolute; right: 20px; z-index: 100;" ng-submit="refresh()">
+    <form style="position: absolute; right: 20px;" ng-submit="refresh()">
         <button type="submit" class="btn btn-primary">Refresh</button>
     </form>
 
-    <div id="browser-window" >
+    <div id="browser-window" style ="full-height">
 
         <div id="viewport">
             <div id="viewport-content">
                 <div class="bubble-container" ng-repeat="m in messages">
-                    <div ng-if="m.msgType !== 'tma'">
+                    <div ng-if="m.msgType !== 'tma'" id="{{m.messageId}}">
                         <!-- div class="avatar avatar-{{m.side}}"><img src="{{m.avatar}}" /></div -->
                         <div class="bubble bubble-{{m.side}}">{{m.text}}</div>
                     </div>
-                    <contact-card-view ng-if="m.msgType === 'tma'" contact="m.text"></contact-card-view>
+                    <contact-card-view id="{{m.messageId}}" ng-if="m.msgType === 'tma'" contact="m.text"></contact-card-view>
                 </div>
             </div>
         </div>
+        <div style="bottom:0px;">
+            <form class="row row-chat" ng-submit="sendMessage()">
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="messageText" placeholder="Ask: Tell me about John Smith" />
 
-        <form class="row row-chat" ng-submit="sendMessage()">
-            <div class="input-group">
-                <input type="text" class="form-control" ng-model="messageText" placeholder="Ask: Tell me about John Smith" />
-
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-primary">Send</button>
-                </span>
-            </div>
-
-        </form>
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </span>
+                </div>
+            </form>
+        </div>
     </div>
 
 </div>

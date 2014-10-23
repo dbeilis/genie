@@ -13,9 +13,9 @@
 .g-widget > .g-cover > .g-bk-image {
   width: 100%;
   background-size: 100%;
+  background-repeat: no-repeat;
   height: auto;
   min-height: 160px;
-  border-radius: 4px 4px 0 0;
 }
 
 .g-widget > .g-cover > .photo {
