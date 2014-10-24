@@ -1,0 +1,29 @@
+html {
+	height: 100%; 
+}
+
+body {
+	height: 100%;
+	background-color: #eaeaea;
+}
+
+.full-height {
+	height: 100%;
+}
+
+#registration_screen {
+	padding: 30px;
+}
+
+.header {
+    z-index: 2;
+    position: absolute;
+    width: 100%;
+}
+
+#chat_panel {
+	z-index: 1;
+    position: absolute;
+	padding: 30px;
+}
+
