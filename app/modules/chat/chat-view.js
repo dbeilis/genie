@@ -15,6 +15,8 @@ angular.module('chat',[])
     .controller('ChatController', ['$scope', '$rootScope', '$log', '$timeout', 'chatWebsocketTransportService', 
         function($scope, $rootScope, $log, $timeout, chatWebsocketTransportService) {
 
+            var notID = 0;
+
             $scope.messages = [];
 
             $scope.error = null;
@@ -32,6 +34,11 @@ angular.module('chat',[])
 
                 this.sendChatMessage(text);
                 $scope.messageText = "";
+            }.bind(this);
+
+            $scope.callme = function() {
+                $log.info("Call me is launched...");
+                this.sendChatMessage("call me");
             }.bind(this);
 
             $scope.refresh = function() {
@@ -59,32 +66,107 @@ angular.module('chat',[])
                 })
             };
 
+            function creationCallback(notID) {
+                $log.debug("Succesfully created " + notID + " notification");
+                $timeout(function() {
+                    chrome.notifications.clear(notID, function(wasCleared) {
+                        $log.debug("Notification " + notID + " cleared: " + wasCleared);
+                    });
+                }, 15000);
+            }
+
+            // Event handlers for the various notification events
+            function notificationClosed(notID, bByUser) {
+                $log.debug("The notification '" + notID + "' was closed" + (bByUser ? " by the user" : ""));
+            }
+
+            function notificationClicked(notID) {
+                $log.debug("The notification '" + notID + "' was clicked");
+            }
+
+            function notificationBtnClick(notID, iBtn) {
+                $log.debug("The notification '" + notID + "' had button " + iBtn + " clicked");
+            }
+
+            var loadImage = function(uri, callback) {
+                var xhr = new XMLHttpRequest();
+                xhr.responseType = 'blob';
+                xhr.onload = function() {
+                    callback(window.URL.createObjectURL(xhr.response), uri);
+                }
+                xhr.open('GET', uri, true);
+                xhr.send();
+            }
+
+            function sendNotificationWithImage(_title, _icon) {
+                var options = {
+                    type : "basic",
+                    title: _title,
+                    message: "Incoming call",
+                    iconUrl: _icon,
+                    buttons: [
+                        { title: 'Decline' }
+                    ],
+                    priority: 0
+                };
+
+                chrome.notifications.create("id"+notID++, options, creationCallback);
+            }
+
+            function sendNotification(message) {
+
+                var _title = (message.fullPrefName) ? message.fullPrefName : message.phoneNumber;
+                if (!_title || _title.toLowerCase() === 'anonymous') {
+                    _title = "Anonymous (" + message.phoneNumber + ")";
+                }
+
+                if (message.pictureUrl && message.pictureUrl !== "") {
+
+                    try{
+                        loadImage(message.pictureUrl, function(blobUri, requesteUri) {
+                            sendNotificationWithImage(_title, blobUri);
+                        });
+                    } catch(err){
+                        $log.warn("Error Retrieving image for (" + message.pictureUrl + ") - " + err);
+                        sendNotificationWithImage(_title, "/images/avatar.png");
+                    }
+
+                } else {
+                    sendNotificationWithImage(_title, "/images/avatar.png");
+                }
+
+            }
+
             this.renderEvent = function(event) {
 
                 var data = JSON.parse(event.data);
 
-                if (data && data.type === 'chat_server_message') {
-                    if (data.message && data.message.participant && data.message.text) {
-                        var side = 'left';
-                        if (data.message.participant.type === 'Customer') {
-                            side = 'right';
+                if (data) {
+                    if (data.type === 'chat_server_message') {
+                        if (data.message && data.message.participant && data.message.text) {
+                            var side = 'left';
+                            if (data.message.participant.type === 'Customer') {
+                                side = 'right';
+                            }
+
+                            var curMessageId = $scope.messages.length;
+
+                            $scope.messages.push({
+                                messageId: curMessageId,
+                                avatar: "images/avatar.png",
+                                msgType: data.message.msgType,
+                                text: data.message.text,
+                                side: side
+                            });
+                            $scope.$apply();
+
+                            // Animate
+                            angular.element("#viewport").animate({
+                                scrollTop:  $("#viewport-content").height()
+                            }, 800);
                         }
-
-                        var curMessageId = $scope.messages.length;
-
-                        $scope.messages.push({
-                            messageId: curMessageId,
-                            avatar: "images/avatar.png",
-                            msgType: data.message.msgType,
-                            text: data.message.text,
-                            side: side
-                        });
-                        $scope.$apply();
-
-                        // Animate
-                        angular.element("#viewport").animate({
-                            scrollTop:  $("#viewport-content").height()
-                        }, 800);
+                    } else if (data.type === 'notification') {
+                        sendNotification(data.message);
                     }
                 }
 

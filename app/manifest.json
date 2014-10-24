@@ -15,6 +15,7 @@
     "128": "images/swirl_128.png"
   },
   "permissions": [
+    "notifications",
     "geolocation",
     "storage",
     "alwaysOnTopWindows",

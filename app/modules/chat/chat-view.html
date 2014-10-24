@@ -1,6 +1,10 @@
 <div ng-controller="ChatController" class="full-height">
 
-    <form style="position: absolute; right: 20px;" ng-submit="refresh()">
+    <form style="position: absolute; left: 20px; z-index: 200;" ng-submit="callme()">
+        <button type="submit" class="btn btn-primary">Call me</button>
+    </form>
+
+    <form style="position: absolute; right: 20px; z-index: 200;" ng-submit="refresh()">
         <button type="submit" class="btn btn-primary">Refresh</button>
     </form>
 
