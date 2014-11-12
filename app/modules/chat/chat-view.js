@@ -92,7 +92,11 @@ angular.module('chat',[])
                 var xhr = new XMLHttpRequest();
                 xhr.responseType = 'blob';
                 xhr.onload = function() {
-                    callback(window.URL.createObjectURL(xhr.response), uri);
+                    if (xhr.status === 200) {
+                        callback(window.URL.createObjectURL(xhr.response), uri);    
+                    } else {
+                        $log.debug("Failed to load image - " + xhr.status + " - " + xhr.statusText);
+                    }
                 }
                 xhr.open('GET', uri, true);
                 xhr.send();
